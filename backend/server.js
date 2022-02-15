@@ -1,8 +1,13 @@
 const { urlencoded } = require('express')
+const colors = require('colors')
 const {errorHandler} = require('./middleware/errorHandler')
 const express = require('express')
 const dotenv = require('dotenv').config()
 const port = process.env.PORT || 5000
+const connectDB = require('./config/db')
+
+//Connect to mongoDB database  
+connectDB()
 
 const app = express()
 
