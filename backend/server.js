@@ -37,6 +37,7 @@ handler function, we can type require('<file path>') to point app.use() to anoth
 file with an exported handler function as we have elected to do below.*/ 
 
 app.use('/api/goals', require('./routes/goalRoutes')) 
+app.use('/api/users', require('./routes/userRoutes')) 
 
 app.use(errorHandler) 
 
