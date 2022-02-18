@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react'
-import { FaUser } from 'react-icons/fa'
+import { useState, useEffect } from 'react'   
+import { FaUser } from 'react-icons/fa'  
 
-function Register() {
+function Register() {  
 
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState({    
         name: '',
-        email: '',
+        email: '',  
         password: '',
         password2: ''
     })
@@ -14,10 +14,12 @@ function Register() {
 
     const onChange = (e) => {
         setFormData(
-            (prevState) => ({
-                ...prevState,
-                [e.target.name]: e.target.value,
-            }) 
+            (prevState) => ({ 
+                ...prevState, //<- This line creates a copy of the formData variable called 'prevState'. 
+                [e.target.name]: e.target.value, //<- This line gets the name of the input tag from the input event and sets 
+                //it to the value of the input. For example if I type 'John@gmail.com' in the name input, this line 
+                //would effectively read: email: "John@gmail.com". This overides the value for email in the state object.
+            })  
         )
     }
 
