@@ -1,5 +1,10 @@
 import { useState, useEffect } from 'react'   
+import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import {toast} from 'react-toastify' 
 import { FaUser } from 'react-icons/fa'  
+import { register, reset } from '../features/auth/authSlice'
+
 
 function Register() {  
 
@@ -12,6 +17,13 @@ function Register() {
 
     const { name, email, password, password2 } = formData 
 
+    const navigate = useNavigate()
+    const dispatch = useDispatch() 
+
+    const { user, isLoading, isError, isSuccess, message } = useSelector(
+        (state) => state.auth
+    )
+
     const onChange = (e) => {
         setFormData(
             (prevState) => ({ 
@@ -19,7 +31,7 @@ function Register() {
                 [e.target.name]: e.target.value, //<- This line gets the name of the input tag from the input event and sets 
                 //it to the value of the input. For example if I type 'John@gmail.com' in the name input, this line 
                 //would effectively read: email: "John@gmail.com". This overides the value for email in the state object.
-            })  
+            })    
         )
     }
 
