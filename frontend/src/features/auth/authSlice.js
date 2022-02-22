@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'  
 import authService from './authService' 
 
 //Get user from local storage 
@@ -23,7 +23,7 @@ export const register = createAsyncThunk('auth/register', async (user, thunkAPI)
 
         const message = (error.response && error.response.data && error.response.data.message) 
         || error.message || error.toString() 
-        return thunkAPI.rejectWithValue(message)
+        return thunkAPI.rejectWithValue(message)  
 
     }
 
@@ -50,7 +50,7 @@ export const logout = createAsyncThunk('auth/logout', async () => {
 })
 
 export const authSlice = createSlice({
-    name: 'auth',
+    name: 'auth', //This name is used to select the state from another component using useSelector(( state )=>{ state.auth })
     initialState,
     reducers: {
         reset: (state) => {
@@ -70,7 +70,7 @@ export const authSlice = createSlice({
                 state.isSuccess = true
                 state.user = action.payload
             })
-            .addCase(register.rejected, (state, action) => {
+            .addCase(register.rejected, (state, action) => {    
                 state.isLoading = false
                 state.isError = true
                 state.message = action.payload 
