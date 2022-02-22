@@ -37,16 +37,16 @@ const updateGoal = asyncHandler(async (req, res) => {
         throw new Error('Goal not found')   
     }
 
-    const user = await User.findById(req.user.id)  //Note that req.user comes from the jwt in the authguard, so it is a true reflection of the logged in user         
+               
 
     //Check if user exists
-    if(!user) {
+    if(!req.user) {
         res.status(401)
         throw new Error('User not found') 
     }
 
     //Make sure that user ID matches user ID on the goal 
-    if(user.id !== goal.user.toString()) {
+    if(goal.user.toString() !== req.user.id) {  //Note that req.user comes from the jwt in the authguard, so it is a true reflection of the logged in user
         res.status(401)
         throw new Error("You don't have permission to edit this")
     }
@@ -68,16 +68,14 @@ const deleteGoal = asyncHandler(async (req, res) => {
         throw new Error('Goal not found') 
     }
 
-    const user = await User.findById(req.user.id)
-
     //Check if user exists
-    if(!user) {
+    if(!req.user) {
         res.status(401)
         throw new Error('User not found') 
     }
 
     //Make sure that user ID matches user ID on the goal 
-    if(user.id !== goal.user.toString()) {
+    if(req.user.id !== goal.user.toString()) {
         res.status(401)
         throw new Error("You don't have permission to edit this")
     }

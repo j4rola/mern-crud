@@ -80,10 +80,8 @@ const loginUser = asyncHandler(async (req, res) => {
 
 const getMe = asyncHandler(async (req, res) => {
     
-    const { _id, name, email } = await User.findById(req.user.id) //We can use req.user here because we assigned req.user a value in our guard function, and the getMe function is protected by the guard
-    
+    res.status(200).json(req.user) //We can use req.user here because we assigned req.user a value in our guard function, and the getMe function is protected by the guard
 
-    res.status(200).json({id: _id, name, email}) 
 })
 
 //Generate a JWT 
