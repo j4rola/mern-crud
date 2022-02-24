@@ -1,20 +1,67 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom' 
-import { useSelector } from 'react-redux' 
+import { useSelector, useDispatch } from 'react-redux' 
+import GoalForm from '../components/GoalForm' 
+import Spinner from '../components/Spinner'
+import { getGoals, reset } from '../features/goals/goalSlice'
+import GoalItem from '../components/GoalItem'
+
 
 function Dashboard() {
 
   const navigate = useNavigate() 
+  const dispatch = useDispatch()  
+
   const { user } = useSelector( (state) => state.auth ) 
+  const { goals, isLoading, isError, message } = useSelector( (state) => state.goals)
   
-  useEffect(() => {
+  useEffect( () => {  
+
+    if(isError) {
+      console.log(message)   
+    }
+
     if(!user) {
       navigate('/login')
     }
-  })
+
+    dispatch(getGoals())
+
+    return () => {        //When using the useEffect hook, whatever function is put after the return statement 
+      dispatch(reset())   //will run when the component is navigated away from/unmounted  
+    }
+
+  }, [user, navigate, isError, message, dispatch] )
+
+  const onSubmit = () => {
+
+  }
+
+  if(isLoading) {
+    return <Spinner/> 
+  }
 
   return (
-    <div>Dashboard</div>
+    <>
+
+      <section className="heading">
+        <h1>Welcome, {user && user.name}!</h1>
+        <p>Goals Dashboard</p>
+        
+      </section>
+
+      <GoalForm/> 
+
+      <section className="content">
+        {goals.length > 0 ? (<div className="goals">
+
+          {goals.map((goal) => (<GoalItem goal={goal} key={goal._id}/>))}
+
+        </div>) : (<h3>You have not set any goals</h3>)}
+      </section>
+      
+    </>
+
   )
 }
 

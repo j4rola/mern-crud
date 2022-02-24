@@ -97,6 +97,7 @@ h3 {
   margin: 10px 0;
   padding: 20px 0 10px;
   position: relative;
+  border-radius: 10px;
 }
 
 .goal .close {
@@ -189,6 +190,10 @@ h3 {
   border-color: #000 transparent #555 transparent;
   border-radius: 50%;
   animation: spin 1.2s linear infinite;
+}
+
+#btn-close {
+  color: darkred;
 }
 
 @keyframes spin {
