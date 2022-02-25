@@ -6,4 +6,5 @@ This app includes a login system so that a user can access private information t
 
 User login functionality includes security, making use of the bcrypt library for password hashing and jwt's for authentication. 
 
-USAGE: Run "npm run dev" to run both react dev server and backend servers at the same time. 
+
+USAGE: Run "npm run dev" to run both react dev server and backend servers at the same time.    

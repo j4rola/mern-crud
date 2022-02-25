@@ -1,3 +1,4 @@
+const path = require('path')
 const { urlencoded } = require('express')
 const colors = require('colors')
 const {errorHandler} = require('./middleware/errorHandler')
@@ -38,6 +39,19 @@ file with an exported handler function as we have elected to do below.*/
 
 app.use('/api/goals', require('./routes/goalRoutes')) 
 app.use('/api/users', require('./routes/userRoutes')) 
+
+//Serve frontend
+if(process.env.NODE_ENV === 'production') { 
+
+    app.use(express.static(path.join(__dirname, '../frontend/build'))) 
+
+    app.get('*', (req, res) => 
+        res.sendFile(path.resolve(__dirname, '../', 'frontend', 'build', 'index.html'))       
+    )
+
+} else {
+    app.get('/', (req, res) => res.send('Please set environment to production'))     
+}
 
 app.use(errorHandler) 
 
