@@ -3,14 +3,17 @@
   "version": "1.0.0",
   "description": "Goalsetter app with mern",
   "main": "server.js",
+  "engines": {
+    "node": "v16.10.0" 
+  },
   "scripts": {
     "start": "node backend/server.js",
     "server": "nodemon backend/server.js",
     "client": "npm start --prefix frontend",
-    "dev": "concurrently \"npm run server\" \"npm run client\" ",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
   },
-  "author": "Joe Froula",
+  "author": "Joe Froula",  
   "license": "MIT",  
   "dependencies": {
     "bcryptjs": "^2.4.3",
