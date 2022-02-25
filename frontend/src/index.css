@@ -196,6 +196,10 @@ h3 {
   color: darkred;
 }
 
+#btn-x {
+  margin: 5px; 
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);

@@ -33,13 +33,8 @@ function Dashboard() {
 
   }, [user, navigate, isError, message, dispatch] )
 
-  const onSubmit = () => {
-
-  }
-
-  if(isLoading) {
-    return <Spinner/> 
-  }
+  
+  
 
   return (
     <>
